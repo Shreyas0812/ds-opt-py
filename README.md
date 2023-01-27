@@ -3,6 +3,8 @@ The primary math and illustration can be found at: https://github.com/nbfigueroa
 
 If you only need the clustering method, please follow the instruction here for phys_gmm_python package: https://github.com/penn-figueroa-lab/phys_gmm_python
 
+For any questions concerning the usage please contact: HuiTakami@gmail.com. If you are one of the Lab Slack members, please dm me through Slack.
+
 # main function (open main.py file)
 To use this code,  you should change this variable to your current package directory:
   ```
