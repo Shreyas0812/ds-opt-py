@@ -48,9 +48,9 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
 
         if ctr_type != 1:
             if M == 2:
-                b_vars.append([cp.Variable(1), cp.Variable(1)])
+                b_vars.append(cp.Variable((2, 1)))
             else:
-                b_vars.append([cp.Variable(1), cp.Variable(1), cp.Variable(1)])
+                b_vars.append(cp.Variable((3, 1)))
             Q_vars.append(cp.Variable((M, M), symmetric=True))
 
 
@@ -60,18 +60,14 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
         if ctr_type == 0:
             constrains += [A_vars[k].T + A_vars[k] << epi]
             # constrains += [b_vars[k].T == -A_vars[k] @ attractor]
-            constrains += [cp.reshape(cp.hstack([b_vars[k][0], b_vars[k][1]]), (2, 1)) == -A_vars[k] @ attractor]
+            constrains += [b_vars[k] == -A_vars[k] @ attractor]
 
         elif ctr_type == 1:
             constrains += [A_vars[k].T @ P + P @ A_vars[k] << epi]
         else:
             constrains += [A_vars[k].T @ P + P @ A_vars[k] == Q_vars[k]]
             constrains += [Q_vars[k] << epi]
-            if M == 2:
-                constrains += [
-                    cp.reshape(cp.hstack([b_vars[k][0], b_vars[k][1]]), (2, 1)) == -A_vars[k] @ attractor]
-            else:
-                constrains += [cp.reshape(cp.hstack([b_vars[k][0], b_vars[k][1], b_vars[k][2]]), (3, 1)) == -A_vars[k] @ attractor]
+            constrains += [b_vars[k] == -A_vars[k] @ attractor]
 
     # Calculate our estimated velocities caused by each local behavior
     Xi_d_dot_c_raw = []
@@ -82,15 +78,7 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
             f_k = A_vars[k] @ Xi_ref
         else:
             f_k = A_vars[k] @ Xi_ref
-            s_k_1 = cp.promote(b_vars[k][0], (N, 1))
-            s_k_2 = cp.promote(b_vars[k][1], (N, 1))
-            s_k = cp.hstack([s_k_1, s_k_2])
-            if M == 3:
-                s_k_3 = cp.promote(b_vars[k][2], (N, 1))
-                s_k = cp.hstack([s_k, s_k_3]).T
-            else:
-                s_k = s_k.T
-            f_k = f_k + s_k
+            f_k = f_k + b_vars[k]
         Xi_d_dot_c_raw.append(cp.multiply(h_K, f_k))
 
     # Sum each of the local behaviors to generate the overall behavior at
@@ -107,10 +95,7 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
             Xi_dot_total_error = Xi_dot_total_error + cp.norm(Xi_dot_error[:, n], 2)
         Objective = Xi_dot_total_error
     else:
-        Objective = 0
-        for n in range(N):
-            for m in range(M):
-                Objective += Xi_dot_error[m][n] ** 2
+        Objective = cp.norm(Xi_dot_error, 'fro')**2
 
     prob = cp.Problem(cp.Minimize(Objective), constrains)
 
