@@ -5,6 +5,8 @@ If you only need the clustering method, please follow the instruction here for p
 
 For any questions concerning the usage please contact: HuiTakami@gmail.com. If you are one of the Lab Slack members, please dm me through Slack.
 
+Note: Feb.6 Update: modify the code of lpv-ds optimization, now it could compile and optimze within 0.2 second.
+
 # main function (open main.py file)
 To use this code,  you should change this variable to your current package directory:
   ```
