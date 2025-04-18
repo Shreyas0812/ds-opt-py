@@ -1,9 +1,11 @@
 from lpv_opt.posterior_probs_gmm import posterior_probs_gmm
 import numpy as np
 import cvxpy as cp
+from phys_gmm_python.fit_gmm import fig_gmm
+from my_learn_function import my_learn_function
 
 
-def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
+def optimize_lpv_ds_from_data(Data, attractor, ctr_type, est_options, *args):
     M = len(Data)
     N = len(Data[0])
     M = int(M / 2)
@@ -12,6 +14,9 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
     Xi_ref = Data[0:M, :]
     Xi_ref_dot = Data[M:, :]
 
+
+    gmm = fig_gmm(Xi_ref, Xi_ref_dot, est_options)
+    
     # Define Optimization Variables
     K = len(gmm.Priors)
     A_c = np.zeros((K, M, M))
@@ -22,7 +27,7 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
         helper = 1  # blank for later use
         symm_constr = 0
 
-    P = args[0]
+    P = my_learn_function(Data)
     symm_constr = args[1]
 
     h_k = posterior_probs_gmm(Xi_ref, gmm, 'norm')
@@ -109,7 +114,7 @@ def optimize_lpv_ds_from_data(Data, attractor, ctr_type, gmm, *args):
             else:
                 b_c[:, k] = [b_vars[k][0].value, b_vars[k][1].value]
 
-    return A_c, b_c, P
+    return A_c, b_c, P, gmm
 
 
 if __name__ == '__main__':
