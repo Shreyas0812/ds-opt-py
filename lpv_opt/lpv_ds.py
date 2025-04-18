@@ -1,5 +1,5 @@
 import numpy as np
-from lpv_opt.posterior_probs_gmm import posterior_probs_gmm
+from sbamp.ds_opt_py.lpv_opt.posterior_probs_gmm import posterior_probs_gmm
 
 
 def lpv_ds(x, ds_gmm, A_g, b_g):

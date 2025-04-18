@@ -1,8 +1,8 @@
-from lpv_opt.posterior_probs_gmm import posterior_probs_gmm
+from sbamp.ds_opt_py.lpv_opt.posterior_probs_gmm import posterior_probs_gmm
 import numpy as np
 import cvxpy as cp
-from phys_gmm_python.fit_gmm import fig_gmm
-from my_learn_function import my_learn_function
+from sbamp.ds_opt_py.phys_gmm_python.fit_gmm import fig_gmm
+from sbamp.ds_opt_py.lpv_opt.my_learn_function import my_learn_function
 
 
 def optimize_lpv_ds_from_data(Data, attractor, ctr_type, est_options, *args):

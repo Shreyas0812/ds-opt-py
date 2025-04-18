@@ -1,5 +1,5 @@
 import numpy as np
-from phys_gmm_python.gmm_stuff.my_gaussPDF import my_gaussPDF
+from sbamp.ds_opt_py.phys_gmm_python.gmm_stuff.my_gaussPDF import my_gaussPDF
 # havent been tested yet
 
 
