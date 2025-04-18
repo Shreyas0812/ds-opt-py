@@ -1,6 +1,6 @@
 import scipy as sp
 import numpy as np
-from lpv_opt.my_check_function import my_check_function
+from sbamp.ds_opt_py.lpv_opt.my_check_function import my_check_function
 from math import *
 from casadi import *
 

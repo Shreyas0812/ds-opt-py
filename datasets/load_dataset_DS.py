@@ -1,6 +1,6 @@
 from scipy.io import loadmat
 import numpy as np
-from datasets.processDataStructure import processDataStructure
+from sbamp.ds_opt_py.datasets.processDataStructure import processDataStructure
 
 
 def load_dataset_DS(pkg_dir, dataset, sub_sample, nb_trajectories):

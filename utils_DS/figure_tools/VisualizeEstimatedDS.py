@@ -1,8 +1,8 @@
 import numpy as np
-from Structs_DS import Opt_Sim
-from utils_DS.Simulation import Simulation
+from sbamp.ds_opt_py.Structs_DS import Opt_Sim
+from sbamp.ds_opt_py.utils_DS.Simulation import Simulation
 import matplotlib.pyplot as plt
-from utils_DS.sample_initial_points import sample_initial_points
+from sbamp.ds_opt_py.utils_DS.sample_initial_points import sample_initial_points
 
 
 def VisualizeEstimatedDS(Xi_ref, ds_lpv, ds_plot_options):

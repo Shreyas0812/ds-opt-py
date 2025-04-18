@@ -1,6 +1,6 @@
 import yaml
 import numpy as np
-from test_data_from_ml.load_learned_data_from_ML import load_learned_data_from_ML
+from sbamp.ds_opt_py.test_data_from_ml.load_learned_data_from_ML import load_learned_data_from_ML
 
 
 # this function help you to port data to yaml in Matlab way, which sounds really cool

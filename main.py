@@ -7,17 +7,17 @@ from utils_DS.diy_tools.knn_search import knn_search
 from gmr import GMM
 from phys_gmm_python.utils.plotting.simple_classification_check import plot_result
 from Structs_DS import ds_gmms, ds_plot_options
-from utils.adjust_Covariances import adjust_Covariances
+from phys_gmm_python.utils.adjust_Covariances import adjust_Covariances
 from lpv_opt.optimize_lpv_ds_from_data import optimize_lpv_ds_from_data
 from test_data_from_ml.load_learned_data_from_ML import load_learned_data_from_ML
 from test_data_from_ml.port_data_to_yaml import port_data_to_yaml
 import scipy as sci
-from utils.plotting.plot_ellopsoid import plot_result_3D
+from phys_gmm_python.utils.plotting.plot_ellopsoid import plot_result_3D
 from lpv_opt.my_learn_function_3 import my_learn_function
 from lpv_opt.lpv_ds import lpv_ds
 from utils_DS.figure_tools.VisualizeEstimatedDS import VisualizeEstimatedDS
 
-pkg_dir = r'/Users/haihui_gao/Documents/LabWorkSpace/PythonWorkSpace/ds-opt-python'
+pkg_dir = r'/home/kabir/SBAMP/src/sbamp/sbamp/ds_opt_py/phys_gmm_python'
 chosen_dataset = 6  # 6 # 4 (when conducting 2D test)
 sub_sample = 2  # '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 4  # Only for real 3D data

@@ -1,7 +1,7 @@
 import numpy as np
-from phys_gmm_python.utils.linalg.my_pca import my_pca
-from phys_gmm_python.utils.linalg.project_pca import project_pca
-from phys_gmm_python.utils.linalg.reconstruct_pca import reconstruct_pca
+from sbamp.ds_opt_py.phys_gmm_python.utils.linalg.my_pca import my_pca
+from sbamp.ds_opt_py.phys_gmm_python.utils.linalg.project_pca import project_pca
+from sbamp.ds_opt_py.phys_gmm_python.utils.linalg.reconstruct_pca import reconstruct_pca
 
 
 def sample_initial_points(x0_all, nb_points, type, plot_volumn):
